@@ -29,18 +29,11 @@ public class CompoundCommand implements ICompoundCommand {
         return commands.iterator();
     }
 
-    public List<DriverCommand> getCommands() {
-        return commands;
-    }
+
 
     //Creates a new CompoundCommand from a list of commands.
     public static CompoundCommand fromListOfCommands(List<DriverCommand> commands) {
         return new CompoundCommand(commands);
-    }
-
-    //Creates a new empty CompoundCommand.
-    public static CompoundCommand empty() {
-        return new CompoundCommand(Collections.emptyList());
     }
 
     //Returns a new CompoundCommand with additional commands appended.
@@ -71,7 +64,7 @@ public class CompoundCommand implements ICompoundCommand {
 
         //Adds all commands from another compound command to the builder.
         public Builder add(CompoundCommand compoundCommand) {
-            this.commands.addAll(compoundCommand.getCommands());
+            this.commands.addAll(compoundCommand.commands);
             return this;
         }
 
