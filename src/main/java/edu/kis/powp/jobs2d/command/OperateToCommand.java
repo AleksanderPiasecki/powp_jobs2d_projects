@@ -21,6 +21,10 @@ public class OperateToCommand implements DriverCommand {
         driver.operateTo(posX, posY);
     }
 
+    /**
+     * Accepts a visitor and calls its visit method for this command.
+     * @param visitor the visitor to accept.
+     */
     @Override
     public void accept(CommandVisitor visitor) {
         visitor.visit(this);

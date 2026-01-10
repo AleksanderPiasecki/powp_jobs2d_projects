@@ -8,10 +8,18 @@ import edu.kis.powp.jobs2d.command.DriverCommand;
 import edu.kis.powp.jobs2d.features.CommandsFeature;
 import edu.kis.powp.jobs2d.visitor.CounterVisitor;
 
+/**
+ * Listener implementation that counts the number of atomic commands in the current command using CounterVisitor.
+ */
 public class SelectCountCommandOptionListener implements ActionListener {
 
     private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+    /**
+     * Triggered when the action is performed.
+     * Retrieves the current command, counts its sub-commands, and logs the result.
+     * @param e the action event.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         DriverCommand command = CommandsFeature.getDriverCommandManager().getCurrentCommand();

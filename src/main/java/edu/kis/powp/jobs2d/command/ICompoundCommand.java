@@ -11,6 +11,10 @@ public interface ICompoundCommand extends DriverCommand {
 
     public Iterator<DriverCommand> iterator();
 
+    /**
+     * Accepts a visitor and delegates processing to it.
+     * @param visitor the visitor to accept.
+     */
     @Override
     default void accept(CommandVisitor visitor) {
         visitor.visit(this);
