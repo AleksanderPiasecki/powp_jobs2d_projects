@@ -9,11 +9,14 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 /**
- * Factory that eliminates instanceof checks by using a dispatch table.
- * Each driver type has a registered visitor strategy.
+ * Dispatcher pattern implementation for driver visitors.
+ * Eliminates instanceof checks using O(1) lookup table dispatch.
  */
 public class DriverVisitorDispatcher {
     
+    /**
+     * Dispatch table mapping driver classes to visitor method calls.
+     */
     private static final Map<Class<?>, BiConsumer<DriverVisitor, Job2dDriver>> DISPATCH_TABLE = new HashMap<>();
     
     static {
@@ -32,7 +35,11 @@ public class DriverVisitorDispatcher {
     }
     
     /**
-     * Dispatches visitor to the appropriate visit method based on driver's exact type.
+     * Dispatches visitor to appropriate visit method based on driver type.
+     * 
+     * @param visitor the visitor to dispatch
+     * @param driver the driver to visit
+     * @throws IllegalArgumentException if driver type not registered
      */
     public static void dispatch(DriverVisitor visitor, Job2dDriver driver) {
         BiConsumer<DriverVisitor, Job2dDriver> dispatcher = DISPATCH_TABLE.get(driver.getClass());
