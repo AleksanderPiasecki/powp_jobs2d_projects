@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
-import edu.kis.powp.jobs2d.Job2dDriver;
+import edu.kis.powp.jobs2d.visitor.VisitableJob2dDriver;
 import edu.kis.powp.jobs2d.features.DriverFeature;
 import edu.kis.powp.jobs2d.visitor.DriverCounterVisitor;
 
@@ -23,7 +23,7 @@ public class SelectCountDriverOptionListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        Job2dDriver driver = DriverFeature.getDriverManager().getCurrentDriver();
+        VisitableJob2dDriver driver = DriverFeature.getDriverManager().getCurrentDriver();
 
         if (driver == null) {
             logger.warning("No driver loaded.");

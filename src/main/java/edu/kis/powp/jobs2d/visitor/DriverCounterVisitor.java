@@ -5,7 +5,6 @@ import edu.kis.powp.jobs2d.drivers.DriverComposite;
 
 import java.util.Iterator;
 
-import edu.kis.powp.jobs2d.Job2dDriver;
 import edu.kis.powp.jobs2d.drivers.AnimatedDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDriverAdapter;
 
@@ -46,9 +45,9 @@ public class DriverCounterVisitor implements DriverVisitor {
         }
     }
 
-    public static DriverStats countDrivers(Job2dDriver driver) {
+    public static DriverStats countDrivers(VisitableJob2dDriver driver) {
         DriverCounterVisitor visitor = new DriverCounterVisitor();
-        DriverVisitorDispatcher.dispatch(visitor, driver);
+        driver.accept(visitor);
         return new DriverStats(visitor.animatedDriverDecoratorCount, visitor.loggerDriverCount, 
                               visitor.lineDriverAdapterCount);
     }
@@ -70,11 +69,11 @@ public class DriverCounterVisitor implements DriverVisitor {
 
     @Override
     public void visit(DriverComposite driverComposite) {
-        Iterator<Job2dDriver> iterator = driverComposite.iterator();
+        Iterator<VisitableJob2dDriver> iterator = driverComposite.iterator();
 
         while(iterator.hasNext()) {
-            Job2dDriver driver = iterator.next();
-            DriverVisitorDispatcher.dispatch(this, driver);
+            VisitableJob2dDriver driver = iterator.next();
+            driver.accept(this);
         }
     }
 }
