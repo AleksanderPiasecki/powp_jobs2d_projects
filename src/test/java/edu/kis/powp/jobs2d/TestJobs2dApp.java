@@ -13,6 +13,7 @@ import edu.kis.powp.jobs2d.command.gui.CommandManagerWindow;
 import edu.kis.powp.jobs2d.command.gui.CommandManagerWindowCommandChangeObserver;
 import edu.kis.powp.jobs2d.drivers.AnimatedDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.LoggerDriver;
+import edu.kis.powp.jobs2d.drivers.RecordingDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.DriverComposite;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDriverAdapter;
 import edu.kis.powp.jobs2d.events.*;
@@ -90,6 +91,9 @@ public class TestJobs2dApp {
 
         Job2dDriver specialLineWithLoggerDriver = new DriverComposite(Arrays.asList(specialLineDriver, loggerDriver));
         DriverFeature.addDriver("Logger + Special line", specialLineWithLoggerDriver);
+
+        RecordingDriverDecorator recordingDriver = new RecordingDriverDecorator(basicLineDriver);    // zmienić na czerwoną linię!
+        DriverFeature.addDriver("Recording Driver", recordingDriver);
 
         DriverFeature.updateDriverInfo();
     }
