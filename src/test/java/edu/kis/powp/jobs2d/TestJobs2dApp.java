@@ -101,6 +101,7 @@ public class TestJobs2dApp {
         SelectLoadRecordedCommandOptionListener selectLoadRecordedCommandOptionListener = new SelectLoadRecordedCommandOptionListener(recordingDriver);
         application.addTest("Stop recording & Load recorded command", selectLoadRecordedCommandOptionListener);
         DriverFeature.addDriver("Recording Driver", recordingDriver);
+        
         VisitableJob2dDriver rotatedDriver = DriverFeatureFactory.createRotateDriver(basicLineDriver, 45);
         DriverFeature.addDriver("Basic Line + Rotate 45", rotatedDriver);
 
