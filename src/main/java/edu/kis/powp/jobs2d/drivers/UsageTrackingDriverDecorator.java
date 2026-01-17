@@ -1,17 +1,16 @@
 package edu.kis.powp.jobs2d.drivers;
 
-import edu.kis.powp.jobs2d.Job2dDriver;
 import edu.kis.powp.jobs2d.features.MonitoringFeature;
 import edu.kis.powp.jobs2d.visitor.DriverVisitor;
 import edu.kis.powp.jobs2d.visitor.VisitableJob2dDriver;
 
 /**
- * A decorator that wraps any {@link Job2dDriver} and counts distance travelled
+ * A decorator that wraps any {@link VisitableJob2dDriver} and counts distance travelled
  * (all moves) and distance drawn (ink/filament usage).
  */
 public class UsageTrackingDriverDecorator implements VisitableJob2dDriver {
 
-    private final Job2dDriver delegate;
+    private final VisitableJob2dDriver delegate;
     private final String label;
 
     private int lastX = 0;
@@ -25,7 +24,7 @@ public class UsageTrackingDriverDecorator implements VisitableJob2dDriver {
      * @param delegate The driver to wrap and track.
      * @param label    A name to identify this driver.
      */
-    public UsageTrackingDriverDecorator(Job2dDriver delegate, String label) {
+    public UsageTrackingDriverDecorator(VisitableJob2dDriver delegate, String label) {
         this.delegate = delegate;
         this.label = label;
     }
@@ -124,9 +123,7 @@ public class UsageTrackingDriverDecorator implements VisitableJob2dDriver {
 
     @Override
     public void accept(DriverVisitor visitor) {
-        if (delegate instanceof VisitableJob2dDriver) {
-            ((VisitableJob2dDriver) delegate).accept(visitor);
-        }
+        delegate.accept(visitor);
     }
 
     @Override
