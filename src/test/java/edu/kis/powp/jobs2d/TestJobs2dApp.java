@@ -11,6 +11,8 @@ import edu.kis.legacy.drawer.shape.LineFactory;
 import edu.kis.powp.appbase.Application;
 import edu.kis.powp.jobs2d.command.gui.CommandManagerWindow;
 import edu.kis.powp.jobs2d.command.gui.CommandManagerWindowCommandChangeObserver;
+import edu.kis.powp.jobs2d.command.gui.CommandPreviewWindow;
+import edu.kis.powp.jobs2d.command.gui.CommandPreviewWindowObserver;
 import edu.kis.powp.jobs2d.command.gui.SelectImportCommandOptionListener;
 import edu.kis.powp.jobs2d.command.importer.JsonCommandImportParser;
 import edu.kis.powp.jobs2d.drivers.AnimatedDriverDecorator;
@@ -137,6 +139,14 @@ public class TestJobs2dApp {
         CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
                 commandManager);
         CommandsFeature.getDriverCommandManager().getChangePublisher().addSubscriber(windowObserver);
+
+        CommandPreviewWindow commandPreviewWindow = new CommandPreviewWindow();
+        application.addWindowComponent("Command Preview", commandPreviewWindow);
+        CommandPreviewWindowObserver previewObserver = new CommandPreviewWindowObserver(
+                commandPreviewWindow, 
+                CommandsFeature.getDriverCommandManager()
+        );
+        CommandsFeature.getDriverCommandManager().getChangePublisher().addSubscriber(previewObserver);
     }
 
     /**
