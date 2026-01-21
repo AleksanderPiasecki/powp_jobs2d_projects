@@ -16,6 +16,7 @@ import edu.kis.powp.jobs2d.command.gui.CommandPreviewWindowObserver;
 import edu.kis.powp.jobs2d.command.gui.SelectImportCommandOptionListener;
 import edu.kis.powp.jobs2d.command.importer.JsonCommandImportParser;
 import edu.kis.powp.jobs2d.drivers.AnimatedDriverDecorator;
+import edu.kis.powp.jobs2d.drivers.CanvasLimitedDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.LoggerDriver;
 import edu.kis.powp.jobs2d.drivers.DriverComposite;
 import edu.kis.powp.jobs2d.drivers.UsageTrackingDriverDecorator;
@@ -122,6 +123,9 @@ public class TestJobs2dApp {
 
         VisitableJob2dDriver flippedDriver = DriverFeatureFactory.createFlipDriver(basicLineDriver, true, false);
         DriverFeature.addDriver("Basic Line + Flip Horizontal", flippedDriver);
+
+        CanvasLimitedDriverDecorator canvasLimitedDriver = new CanvasLimitedDriverDecorator(basicLineDriver);
+        DriverFeature.addDriver("Canvas-Limited Driver", canvasLimitedDriver);
 
         DriverFeature.updateDriverInfo();
     }
