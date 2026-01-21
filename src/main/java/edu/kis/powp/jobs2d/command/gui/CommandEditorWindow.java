@@ -22,13 +22,13 @@ import java.util.List;
 public class CommandEditorWindow extends JFrame {
     private final CommandManager commandManager;
     private final CommandPreviewWindow previewWindow;
-    private JTree tree;
-    private DefaultTreeModel treeModel;
-    private DriverCommand originalCommand;
-    private JTextField xField;
-    private JTextField yField;
-    private JLabel typeLabel;
-    private JPanel editPanel;
+    private final JTree tree;
+    private final DefaultTreeModel treeModel;
+    private final DriverCommand originalCommand;
+    private final JTextField xField;
+    private final JTextField yField;
+    private final JLabel typeLabel;
+    private final JPanel editPanel;
     private boolean isUpdatingGUI = false;
 
     public CommandEditorWindow(CommandManager commandManager, CommandPreviewWindow previewWindow) {
