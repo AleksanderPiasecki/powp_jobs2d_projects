@@ -1,6 +1,7 @@
 package edu.kis.powp.jobs2d.visitor;
 
 import edu.kis.powp.jobs2d.drivers.LoggerDriver;
+import edu.kis.powp.jobs2d.drivers.RecordingDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.DriverComposite;
 
 import java.util.Iterator;
@@ -85,5 +86,11 @@ public class DriverCounterVisitor implements DriverVisitor {
             VisitableJob2dDriver driver = iterator.next();
             driver.accept(this);
         }
+    }
+
+    @Override
+    public void visit(RecordingDriverDecorator recordingDriverDecorator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'visit'");
     }
 }

@@ -51,9 +51,12 @@ public class RecordingDriverDecorator implements VisitableJob2dDriver {
         return "Recording Driver Decorator wrapping: " + targetDriver.toString();
     }
 
+    // Visitor pattern accept method
     @Override
     public void accept(DriverVisitor visitor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+        visitor.visit(this);
+        if (targetDriver instanceof VisitableJob2dDriver) {
+            ((VisitableJob2dDriver) targetDriver).accept(visitor);
+        }
     }
 }
