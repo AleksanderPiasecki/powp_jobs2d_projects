@@ -1,5 +1,9 @@
 package edu.kis.powp.jobs2d.visitor;
 
+import edu.kis.powp.jobs2d.drivers.LoggerDriver;
+import edu.kis.powp.jobs2d.drivers.RecordingDriverDecorator;
+import edu.kis.powp.jobs2d.drivers.DriverComposite;
+
 import java.util.Iterator;
 
 import edu.kis.powp.jobs2d.drivers.AnimatedDriverDecorator;
@@ -16,6 +20,7 @@ public class DriverCounterVisitor implements DriverVisitor {
     private int lineDriverAdapterCount = 0;
     private int transformerDriverDecoratorCount = 0;
     private int usageTrackingDecoratorCount = 0;
+    private int recordingDriverDecoratorCount = 0;
 
     private DriverCounterVisitor() {
     }
@@ -104,5 +109,11 @@ public class DriverCounterVisitor implements DriverVisitor {
     public void visit(UsageTrackingDriverDecorator usageTrackingDriverDecorator) {
         this.usageTrackingDecoratorCount++;
         usageTrackingDriverDecorator.getDelegate().accept(this);
+    }
+
+    @Override
+    public void visit(RecordingDriverDecorator recordingDriverDecorator) {
+        this.recordingDriverDecoratorCount++;
+        recordingDriverDecorator.getDelegate().accept(this);
     }
 }

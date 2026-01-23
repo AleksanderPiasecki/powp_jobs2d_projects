@@ -17,6 +17,7 @@ import edu.kis.powp.jobs2d.command.gui.SelectImportCommandOptionListener;
 import edu.kis.powp.jobs2d.command.importer.JsonCommandImportParser;
 import edu.kis.powp.jobs2d.drivers.AnimatedDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.LoggerDriver;
+import edu.kis.powp.jobs2d.drivers.RecordingDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.DriverComposite;
 import edu.kis.powp.jobs2d.drivers.UsageTrackingDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDriverAdapter;
@@ -103,6 +104,11 @@ public class TestJobs2dApp {
         VisitableJob2dDriver specialLineWithLoggerDriver = new DriverComposite(Arrays.asList(specialLineDriver, loggerDriver));
         DriverFeature.addDriver("Logger + Special line", specialLineWithLoggerDriver);
 
+        RecordingDriverDecorator recordingDriver = new RecordingDriverDecorator(basicLineDriver);
+        SelectLoadRecordedCommandOptionListener selectLoadRecordedCommandOptionListener = new SelectLoadRecordedCommandOptionListener(recordingDriver);
+        application.addTest("Stop recording & Load recorded command", selectLoadRecordedCommandOptionListener);
+        DriverFeature.addDriver("Recording Driver", recordingDriver);
+        
         // Add monitored versions of drivers
         UsageTrackingDriverDecorator monitoredBasicLine = new UsageTrackingDriverDecorator(basicLineDriver, "Basic line [monitored]");
         MonitoringFeature.registerMonitoredDriver("Basic line [monitored]", monitoredBasicLine);
