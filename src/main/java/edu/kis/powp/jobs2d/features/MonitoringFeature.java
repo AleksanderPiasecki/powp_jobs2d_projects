@@ -58,16 +58,6 @@ public final class MonitoringFeature {
     }
 
     /**
-     * Strategy implementation that wraps a driver with usage tracking
-     * and registers it within this feature.
-     */
-    public static VisitableJob2dDriver driverConfiguration(String name, VisitableJob2dDriver driver) {
-        UsageTrackingDriverDecorator monitoredDriver = new UsageTrackingDriverDecorator(driver, name);
-        registerMonitoredDriver(name, monitoredDriver);
-        return monitoredDriver;
-    }
-
-    /**
      * Menu action that prints usage summaries for all monitored drivers.
      * Reports the total travel distance and drawing distance (ink/filament usage)
      * for each registered driver.

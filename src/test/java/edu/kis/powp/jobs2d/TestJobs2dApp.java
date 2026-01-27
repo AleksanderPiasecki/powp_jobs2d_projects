@@ -1,5 +1,6 @@
 package edu.kis.powp.jobs2d;
 
+import edu.kis.powp.jobs2d.features.MonitoringDriverConfigurationStrategy;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
@@ -79,7 +80,7 @@ public class TestJobs2dApp {
      * @param application Application context.
      */
     private static void setupDrivers(Application application) {
-        DriverFeature.setConfigurationStrategy(MonitoringFeature::driverConfiguration);
+        DriverFeature.setConfigurationStrategy(new MonitoringDriverConfigurationStrategy());
 
         VisitableJob2dDriver loggerDriver = new LoggerDriver(logger);
         DriverFeature.addDriver("Logger driver", loggerDriver);
