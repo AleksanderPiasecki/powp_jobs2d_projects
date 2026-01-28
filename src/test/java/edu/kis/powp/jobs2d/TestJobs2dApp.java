@@ -16,11 +16,14 @@ import edu.kis.powp.jobs2d.command.gui.CommandPreviewWindow;
 import edu.kis.powp.jobs2d.command.gui.CommandPreviewWindowObserver;
 import edu.kis.powp.jobs2d.command.gui.SelectImportCommandOptionListener;
 import edu.kis.powp.jobs2d.command.importer.JsonCommandImportParser;
+import edu.kis.powp.jobs2d.command.manager.CommandManager;
+import edu.kis.powp.jobs2d.drivers.AnimatedDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.*;
 import edu.kis.powp.jobs2d.drivers.LoggerDriver;
 import edu.kis.powp.jobs2d.drivers.RecordingDriverDecorator;
 import edu.kis.powp.jobs2d.drivers.DriverComposite;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDriverAdapter;
+import edu.kis.powp.jobs2d.drivers.transformation.*;
 import edu.kis.powp.jobs2d.visitor.VisitableJob2dDriver;
 import edu.kis.powp.jobs2d.events.*;
 import edu.kis.powp.jobs2d.features.CanvasFeature;
@@ -31,7 +34,6 @@ import edu.kis.powp.jobs2d.features.MonitoringFeature;
 import edu.kis.powp.jobs2d.features.FeatureManager;
 import edu.kis.powp.jobs2d.features.ViewFeature;
 
-import edu.kis.powp.jobs2d.drivers.transformation.DriverFeatureFactory;
 import edu.kis.powp.jobs2d.canvas.CanvasFactory;
 
 
@@ -76,6 +78,22 @@ public class TestJobs2dApp {
         application.addTest("Scale 2.0 command", new SelectRunCurrentScaledUpCommandOptionListener());
         application.addTest("Scale 0.5 command", new SelectRunCurrentScaledDownCommandOptionListener());
         application.addTest("Run command", new SelectRunCurrentCommandOptionListener(DriverFeature.getDriverManager()));
+
+        CommandManager manager = CommandsFeature.getDriverCommandManager();
+        application.addTest("Scale x2",
+                new SelectCommandTransformationOptionListener(manager, new ScaleStrategy(2)));
+        application.addTest("Rotate 90 degrees",
+                new SelectCommandTransformationOptionListener(manager, new RotateStrategy(90)));
+        application.addTest("Flip",
+                new SelectCommandTransformationOptionListener(manager, new FlipStrategy(true, false)));
+        application.addTest("Shift (right: 15)",
+                new SelectCommandTransformationOptionListener(manager, new ShiftStrategy(15, 0)));
+        application.addTest("Shift (down: 15)",
+                new SelectCommandTransformationOptionListener(manager, new ShiftStrategy(0, 15)));
+        application.addTest("Shear (X: 0.5)",
+                new SelectCommandTransformationOptionListener(manager, new ShearStrategy(0.5, 0)));
+        application.addTest("Shear (Y: 0.5)",
+                new SelectCommandTransformationOptionListener(manager, new ShearStrategy(0, 0.5)));
     }
 
     /**
