@@ -14,7 +14,7 @@ import edu.kis.powp.jobs2d.drivers.UsageTrackingDriverDecorator;
  * with monitoring enabled from the driver menu, and use this feature to view
  * usage summaries and reset counters.
  */
-public final class MonitoringFeature {
+public class MonitoringFeature implements IFeature {
 
     /** Holds all registered monitored drivers by their label. */
     private static Map<String, UsageTrackingDriverDecorator> monitoredDrivers = new HashMap<>();
@@ -24,21 +24,17 @@ public final class MonitoringFeature {
 
     private static boolean monitoringEnabled = true;
 
-    private MonitoringFeature() {
+    public MonitoringFeature() {
     }
 
-    /**
-     * Sets up the Monitoring menu with actions to report usage and reset counters.
-     * Called once during application startup.
-     *
-     * @param app               The application context.
-     * @param monitoringLogger  Custom logger; if {@code null}, uses the default application logger.
-     */
-    public static void setupMonitoringPlugin(Application app, Logger monitoringLogger) {
-        if (monitoringLogger != null) {
-            logger = monitoringLogger;
+    public MonitoringFeature(Logger customLogger) {
+        if (customLogger != null) {
+            logger = customLogger;
         }
+    }
 
+    @Override
+    public void setup(Application app) {
 
         app.addComponentMenu(MonitoringFeature.class, "Monitoring", 0);
         app.addComponentMenuElementWithCheckBox(MonitoringFeature.class, "Toggle Monitoring",
@@ -96,5 +92,10 @@ public final class MonitoringFeature {
 
     public static boolean isMonitoringEnabled() {
         return monitoringEnabled;
+    }
+
+    @Override
+    public String getName() {
+        return "Monitoring";
     }
 }
